@@ -27,10 +27,16 @@ size_button.addEventListener("click", function(){
     user_input = Number(user_input); // convert str to int
     if (user_input > 0 && user_input <= 100){
         createGrid(user_input);
+        size = user_input;
     }
     else{
         alert("Sorry, your input is incorrect. Please enter a number between 1 and 100.");
     }
+});
+
+const reset_button = document.getElementById("reset");
+reset_button.addEventListener("click", function (){
+    createGrid(size);
 });
 
 let color = "black";
