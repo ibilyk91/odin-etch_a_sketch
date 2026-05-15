@@ -7,8 +7,6 @@
 }
 
 .cell {
-    flex: 0 0 calc(960px / 16);  /* grow, shrink, width size = 60px */
-    height: calc(960px / 16);
     border: 1px solid #C0C0C0;
     box-sizing: border-box;  /* padding and border included in total width & height */
 }
