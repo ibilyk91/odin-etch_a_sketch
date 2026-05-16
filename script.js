@@ -39,18 +39,30 @@ reset_button.addEventListener("click", function (){
     createGrid(size);
 });
 
-let color = "black";
+let color = "black"; // default color
+const colors_button = document.getElementById("colors");
+colors_button.addEventListener("click", function(){
+    color_picker.click();
+});
+
+const color_picker = document.getElementById("color_picker");
+color_picker.addEventListener("change", function(event){
+    random_mode = false;
+    darken_mode = false;
+    color = event.target.value;
+});
+
 
 let random_mode = false;
-const random_color = document.getElementById("random_color");
-random_color.addEventListener("click", function(){
+const random_color_button = document.getElementById("random_color");
+random_color_button.addEventListener("click", function(){
     random_mode = true;
     darken_mode = false;
 });
 
 let darken_mode = false;
-const darken = document.getElementById("darken");
-darken.addEventListener("click", function(){
+const darken_button = document.getElementById("darken");
+darken_button.addEventListener("click", function(){
     darken_mode = true;
     random_mode = false;
 });
@@ -67,7 +79,7 @@ container.addEventListener("mouseover", function(event){
         }
         else if (darken_mode){
             const dark_percent = 25.5 // 10% of 255
-            let current_color = window.getComputedStyle(event.target).backgroundColor; // use to read the final css, will rgba(0, 0, 0, 0) if nothing was set
+            let current_color = window.getComputedStyle(event.target).backgroundColor; // use to read the final css (what the user sees), will be rgba(0, 0, 0, 0) if nothing was set
 
             if (current_color === "rgba(0, 0, 0, 0)"){ // if cell transparent make it white to be able to darken it
                 current_color = "rgb(255, 255, 255)";
