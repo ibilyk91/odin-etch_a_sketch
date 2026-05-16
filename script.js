@@ -40,15 +40,26 @@ reset_button.addEventListener("click", function (){
 });
 
 let color = "black";
+let random_mode = false;
 
-function setColor(new_color){
-    color = new_color;
-}
+const random_color = document.getElementById("random_color");
+random_color.addEventListener("click", function(){
+    random_mode = true;
+});
 
 const container = document.getElementById("container");
 container.addEventListener("mouseover", function(event){
     if (event.target.classList.contains("cell")){
-        event.target.style.backgroundColor = color;
+        if (random_mode){
+            const r = Math.floor(Math.random() * 256); // random 0-1 * 256 = get random numbers 0-255; floor to remove decimal
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+
+            event.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+        else{
+            event.target.style.backgroundColor = color;
+        }
     }
 });
 
