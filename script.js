@@ -1,4 +1,4 @@
-let size = 16;
+let size = 16; // default grid size
 
 function createGrid(size){
     const container = document.getElementById("container");
@@ -40,11 +40,19 @@ reset_button.addEventListener("click", function (){
 });
 
 let color = "black";
-let random_mode = false;
 
+let random_mode = false;
 const random_color = document.getElementById("random_color");
 random_color.addEventListener("click", function(){
     random_mode = true;
+    darken_mode = false;
+});
+
+let darken_mode = false;
+const darken = document.getElementById("darken");
+darken.addEventListener("click", function(){
+    darken_mode = true;
+    random_mode = false;
 });
 
 const container = document.getElementById("container");
@@ -54,6 +62,26 @@ container.addEventListener("mouseover", function(event){
             const r = Math.floor(Math.random() * 256); // random 0-1 * 256 = get random numbers 0-255; floor to remove decimal
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
+
+            event.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+        else if (darken_mode){
+            const dark_percent = 25.5 // 10% of 255
+            let current_color = window.getComputedStyle(event.target).backgroundColor; // use to read the final css, will rgba(0, 0, 0, 0) if nothing was set
+
+            if (current_color === "rgba(0, 0, 0, 0)"){ // if cell transparent make it white to be able to darken it
+                current_color = "rgb(255, 255, 255)";
+            }
+
+            // finds numbers in string "rgb(0, 0, 0)" \d digit 0-9, + one or mode digits, g global find all
+            let rgb_values = current_color.match(/\d+/g);
+            let r = Number(rgb_values[0]); // get value and convert str to int
+            let g = Number(rgb_values[1]);
+            let b = Number(rgb_values[2]);
+
+            r = Math.max(0, Math.floor(r - dark_percent));
+            g = Math.max(0, Math.floor(g - dark_percent));
+            b = Math.max(0, Math.floor(b - dark_percent));
 
             event.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         }
