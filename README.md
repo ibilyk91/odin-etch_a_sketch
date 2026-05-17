@@ -1,2 +1,2 @@
 # odin-etch_a_sketch
-An Etch-A-Sketch game built with HTML, CSS, and vanilla JavaScript where users can hover to draw and dynamically resize the grid.
+A browser-based sketchpad built with HTML, CSS, and vanilla JavaScript where users hover to draw and can dynamically resize the grid.
