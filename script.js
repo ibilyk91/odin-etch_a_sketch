@@ -46,7 +46,7 @@ colors_button.addEventListener("click", function(){
 });
 
 const color_picker = document.getElementById("color_picker");
-color_picker.addEventListener("change", function(event){
+color_picker.addEventListener("input", function(event){
     random_mode = false;
     darken_mode = false;
     color = event.target.value;
@@ -79,13 +79,14 @@ container.addEventListener("mouseover", function(event){
         }
         else if (darken_mode){
             const dark_percent = 25.5 // 10% of 255
-            let current_color = window.getComputedStyle(event.target).backgroundColor; // use to read the final css (what the user sees), will be rgba(0, 0, 0, 0) if nothing was set
+            // use to read the final css (what the user sees), will be rgba(0, 0, 0, 0) if nothing was set
+            let current_color = window.getComputedStyle(event.target).backgroundColor;
 
             if (current_color === "rgba(0, 0, 0, 0)"){ // if cell transparent make it white to be able to darken it
                 current_color = "rgb(255, 255, 255)";
             }
 
-            // finds numbers in string "rgb(0, 0, 0)" \d digit 0-9, + one or mode digits, g global find all
+            // finds numbers in string "rgb(0, 0, 0)", \d digit 0-9, + one or mode digits, g global find all
             let rgb_values = current_color.match(/\d+/g);
             let r = Number(rgb_values[0]); // get value and convert str to int
             let g = Number(rgb_values[1]);
